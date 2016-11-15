@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Jquery002</title>
+	<link rel="stylesheet" href="1.css">
+
+	<!-- <script src="http://code.jquery.com/jquery-1.8.2.js"></script> -->
+	  <!-- <script src="bootstrap.min.js"></script> -->
+	 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+		<div class="khoito">
+			<div class="anhslide">
+				<div class="_1slide active"><img class="a" src="images/1.jpg" alt=""></div>
+				<div class="_1slide"><img class="a" src="images/2.jpg" alt=""></div>
+				<div class="_1slide"><img class="a" src="images/3.jpg" alt=""></div>
+				<div class="_1slide"><img  class="a" src="images/4.jpg" alt=""></div>
+			</div>
+			<div class="nutslide">
+				<div class="next"><img  data-toggle="tooltip" data-placement="right" title="Hooray!"class="preview" src="images/phai.jpg" alt=""></div>
+				<div class="prev"><img class="preview" src="images/trai.jpg" alt=""></div>
+				
+			</div>
+			<div class="nut">
+				<ul>
+					<li class="chon"> 1</li>
+					<li> 2</li>
+					<li> 3</li>
+					<li> 4</li>
+				</ul>
+			</div>
+
+		</div>
+<script type="text/javascript">
+$(document).ready(function() {
+		time=setInterval(function(){
+			$('.next').trigger('click')
+		},3000)
+
+		$('.next').click(function(event) {
+			clearInterval(time);
+		var sau=$('.active').next();
+		vitri=$('.chon').index()+1;
+		 // console.log(sau.length);
+		
+		 console.log(sau+1);
+		$('.chon').removeClass('chon');
+		if(vitri==$('.nut ul li').length)
+		{
+			vitri=0;
+		}
+		$('.nut ul li:nth-child('+(vitri+1)+')').addClass('chon');
+		if(sau.length==0)
+		{
+			$('.active').addClass('goLeft').one('webkitAnimationEnd', function(event) {
+			$('.goLeft').removeClass('goLeft');
+		});
+			$('.anhslide ._1slide:first').addClass('goTheRight').one('webkitAnimationEnd', function(event) {
+			$('.active').removeClass('active');
+			$('.goTheRight').addClass('active').removeClass('goTheRight')
+		});
+		}
+		else{
+		$('.active').addClass('goLeft').one('webkitAnimationEnd', function(event) {
+			$('.goLeft').removeClass('goLeft');
+		});
+		
+		
+		sau.addClass('goTheRight').one('webkitAnimationEnd', function(event) {
+			$('.active').removeClass('active');
+			$('.goTheRight').addClass('active').removeClass('goTheRight')
+		});
+	}
+	  // imagePreview(anh);
+	});
+	$('.prev').click(function(event) {
+		/* Act on the event */
+		var truoc= $('.active').prev()
+		// console.log(truoc.length);
+		vitri=$('.chon').index()+1
+		$('.chon').removeClass('chon');
+		// console.log($('.nut ul li').length+1);
+		if(vitri==1)
+		{
+			vitri=$('.nut ul li').length+1;
+		}
+		$('.nut ul li:nth-child('+(vitri-1)+')').addClass('chon');
+		if(truoc.length==0)
+		{
+			$('.active').addClass('goRight').one('webkitAnimationEnd', function(event) {
+			$('.goRight').removeClass('goRight');
+			});	
+			$('.anhslide ._1slide:last').addClass('goTheLeft').one('webkitAnimationEnd', function(event) {
+			$('.active').removeClass('active');
+			$('.goTheLeft').addClass('active').removeClass('goTheLeft')
+		});		
+		}else{
+		$('.active').addClass('goRight').one('webkitAnimationEnd', function(event) {
+			$('.goRight').removeClass('goRight');
+	});	
+	truoc.addClass('goTheLeft').one('webkitAnimationEnd', function(event) {
+			$('.active').removeClass('active');
+			$('.goTheLeft').addClass('active').removeClass('goTheLeft')
+		});
+		}		
+	});	
+	$('.nut ul li').click(function(event) {
+		$('.chon').removeClass('chon');
+		$(this).addClass('chon');
+		$('.active').addClass('goLeft').one('webkitAnimationEnd', function(event) {
+			$('.goLeft').removeClass('goLeft');
+			});
+		var i=$('.chon').index()+1;
+		$('.anhslide ._1slide:nth-child('+i+')').addClass('goTheRight').one('webkitAnimationEnd', function(event) {
+			$('.active').removeClass('active');
+			$('.goTheRight').addClass('active').removeClass('goTheRight')
+	
+			});
+	});
+	  function imagePreview (i){	
+	/* CONFIG */
+		
+		xOffset = 10;
+		yOffset = 30;
+		
+		// these 2 variable determine popup's distance from the cursor
+		// you might want to adjust to get the right result
+		
+	/* END CONFIG */
+	$(".preview").hover(function(e){
+		 // for(i=0;i<$('img.a').length;i++){
+		 	var k=$('._1slide img');
+		var sau=$(k[i]).attr('src');
+		console.log(sau);	
+		
+		this.title = "";	
+		// var c = (this.t != "") ? "<br/>" + this.t : "";
+		$("body").append("<p id='preview'><img src='"+ sau +"'  /></p>");								 
+		$("#preview")
+			.css("top",(e.pageY - xOffset) + "px")
+			.css("left",(e.pageX + yOffset) + "px")
+			.fadeIn("fast");	
+
+    },
+	function(){
+		this.title = this.t;	
+		$("#preview").remove();
+    }
+    );	
+	$(".preview").mousemove(function(e){
+		$("#preview")
+			.css("top",(e.pageY - xOffset) + "px")
+			.css("left",(e.pageX + yOffset) + "px");
+	});			
+	};
+// $('[data-toggle="tooltip"]').tooltip();
+// $('.preview').tooltip({ content: '<img src="images/1.jpg" />' });
+ });
+</script>
+</body>
+</html>
