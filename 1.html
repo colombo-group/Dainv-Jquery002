@@ -5,23 +5,22 @@
 	<title>Jquery002</title>
 	<link rel="stylesheet" href="1.css">
 
-	<!-- <script src="http://code.jquery.com/jquery-1.8.2.js"></script> -->
-	  <!-- <script src="bootstrap.min.js"></script> -->
-	 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+	 <script type="text/javascript" src="jquery.js"></script>
 </head>
 <body>
 		<div class="khoito">
 			<div class="anhslide">
 				<div class="_1slide active"><img class="a" src="images/1.jpg" alt=""></div>
-				<div class="_1slide"><img class="a" src="images/2.jpg" alt=""></div>
-				<div class="_1slide"><img class="a" src="images/3.jpg" alt=""></div>
-				<div class="_1slide"><img  class="a" src="images/4.jpg" alt=""></div>
+				<div class="_1slide"><img   src="images/2.jpg" alt=""></div>
+				<div class="_1slide"><img  src="images/3.jpg" alt=""></div>
+				<div class="_1slide"><img   src="images/4.jpg" alt=""></div>
 			</div>
 			<div class="nutslide">
-				<div class="next"><img  data-toggle="tooltip" data-placement="right" title="Hooray!"class="preview" src="images/phai.jpg" alt=""></div>
-				<div class="prev"><img class="preview" src="images/trai.jpg" alt=""></div>
+				<div class="next"><img   class="preview" src="images/phai.jpg" alt=""></div>
+				<div class="prev"><img   class="preview1" src="images/trai.jpg" alt=""></div>
+				<div class="tooltipnext"></div>
+				<div class="tooltipprev"></div>
 				
 			</div>
 			<div class="nut">
@@ -43,10 +42,9 @@ $(document).ready(function() {
 		$('.next').click(function(event) {
 			clearInterval(time);
 		var sau=$('.active').next();
-		vitri=$('.chon').index()+1;
-		 // console.log(sau.length);
 		
-		 console.log(sau+1);
+		vitri=$('.chon').index()+1;
+		 
 		$('.chon').removeClass('chon');
 		if(vitri==$('.nut ul li').length)
 		{
@@ -67,17 +65,30 @@ $(document).ready(function() {
 		$('.active').addClass('goLeft').one('webkitAnimationEnd', function(event) {
 			$('.goLeft').removeClass('goLeft');
 		});
-		
-		
+			
+			$(".preview").hover(function() {
+	 	var image=$('.active img').attr('src');
+	 	
+	 	$('.tooltipnext').append("<img src='"+ image +"'  />");
+	 	 $('.tooltipnext').css('opacity','1');
+	 	
+	
+	 }, function() {
+	 		 $(".tooltipnext").css('opacity','0');
+	 		
+	 });
 		sau.addClass('goTheRight').one('webkitAnimationEnd', function(event) {
 			$('.active').removeClass('active');
-			$('.goTheRight').addClass('active').removeClass('goTheRight')
+			$('.goTheRight').addClass('active').removeClass('goTheRight');
+			
 		});
-	}
-	  // imagePreview(anh);
+	} 
+ 
+	 
 	});
 	$('.prev').click(function(event) {
 		/* Act on the event */
+		clearInterval(time);
 		var truoc= $('.active').prev()
 		// console.log(truoc.length);
 		vitri=$('.chon').index()+1
@@ -105,7 +116,18 @@ $(document).ready(function() {
 			$('.active').removeClass('active');
 			$('.goTheLeft').addClass('active').removeClass('goTheLeft')
 		});
-		}		
+		}	
+			$(".preview1").hover(function() {
+	 		var image=$('.active img').attr('src');
+	 	
+	 	$('.tooltipprev').append("<img src='"+ image +"'  />");
+	 	 $('.tooltipprev').css('opacity','1');
+	 	
+	
+	 }, function() {
+	 		 $(".tooltipprev").css('opacity','0');
+	 		
+	 });	
 	});	
 	$('.nut ul li').click(function(event) {
 		$('.chon').removeClass('chon');
@@ -119,45 +141,9 @@ $(document).ready(function() {
 			$('.goTheRight').addClass('active').removeClass('goTheRight')
 	
 			});
+		
 	});
-	  function imagePreview (i){	
-	/* CONFIG */
-		
-		xOffset = 10;
-		yOffset = 30;
-		
-		// these 2 variable determine popup's distance from the cursor
-		// you might want to adjust to get the right result
-		
-	/* END CONFIG */
-	$(".preview").hover(function(e){
-		 // for(i=0;i<$('img.a').length;i++){
-		 	var k=$('._1slide img');
-		var sau=$(k[i]).attr('src');
-		console.log(sau);	
-		
-		this.title = "";	
-		// var c = (this.t != "") ? "<br/>" + this.t : "";
-		$("body").append("<p id='preview'><img src='"+ sau +"'  /></p>");								 
-		$("#preview")
-			.css("top",(e.pageY - xOffset) + "px")
-			.css("left",(e.pageX + yOffset) + "px")
-			.fadeIn("fast");	
 
-    },
-	function(){
-		this.title = this.t;	
-		$("#preview").remove();
-    }
-    );	
-	$(".preview").mousemove(function(e){
-		$("#preview")
-			.css("top",(e.pageY - xOffset) + "px")
-			.css("left",(e.pageX + yOffset) + "px");
-	});			
-	};
-// $('[data-toggle="tooltip"]').tooltip();
-// $('.preview').tooltip({ content: '<img src="images/1.jpg" />' });
  });
 </script>
 </body>

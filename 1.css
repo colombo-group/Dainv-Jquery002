@@ -1,6 +1,40 @@
 *{
-	padding: 0px;
-	margin: 0px;
+    padding: 0px;
+    margin: 0px;
+}
+
+.tooltipprev {
+    position: absolute;
+    z-index: 5;
+    width: 150px;
+    height: 150px;
+    border: 1px solid white;
+    top: 243px;
+    left: 12px;
+}
+
+.tooltipprev img {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+}
+
+.tooltipnext  img,tooltipprev img {
+    width: 150px;
+    height: 150px;
+    position: absolute;
+}
+
+.tooltipnext  {
+    position: absolute;
+    z-index: 5;
+    border: 1px solid white;
+    width: 150px;
+    height: 150px;
+    top: 223px;
+    right: 0px;
+    opacity: 0;
+    overflow: hidden;
 }
 
 #preview img {
@@ -94,67 +128,67 @@ li.chon {
 }
 /*xu ly hieu ung*/
 .active{
-	opacity: 1;
-	visibility: visible;
+    opacity: 1;
+    visibility: visible;
 }
 .goLeft{
-	
-	animation: goLeft 0.5s forwards ;
+    
+    animation: goLeft 0.5s forwards ;
 }
 @-webkit-keyframes goLeft{
-	0%{
-		transform:translateX(0%);
-		opacity: 1;
-		visibility: visible;
-	}
-	100%{
-		transform:translateX(-100%);
-		opacity: 0;
-		visibility: hidden;
-	}
+    0%{
+        transform:translateX(0%);
+        opacity: 1;
+        visibility: visible;
+    }
+    100%{
+        transform:translateX(-100%);
+        opacity: 0;
+        visibility: hidden;
+    }
 }
 
 .goTheRight{
-	animation: goTheRight 0.5s forwards ;
+    animation: goTheRight 0.5s forwards ;
 }
 @-webkit-keyframes goTheRight{
-	0%{
-		transform:translateX(100%);
-		visibility: hidden;
-		opacity: 0;
-	}
-	100%{
-		transform:translateX(0%);
-		visibility: visible;
-		opacity: 1;
-	}
+    0%{
+        transform:translateX(100%);
+        visibility: hidden;
+        opacity: 0;
+    }
+    100%{
+        transform:translateX(0%);
+        visibility: visible;
+        opacity: 1;
+    }
 }
 .goRight{
-	
-	animation: goRight 0.5s forwards ;
+    
+    animation: goRight 0.5s forwards ;
 }
 @-webkit-keyframes goRight{
-	0%{
-		transform:translateX(0%);
-	}
-	100%{
-		transform:translateX(100%);
-	}
+    0%{
+        transform:translateX(0%);
+    }
+    100%{
+        transform:translateX(100%);
+    }
 }
 .goTheLeft{
-	animation: goTheLeft 0.5s forwards ;
+    animation: goTheLeft 0.5s forwards ;
 }
 @-webkit-keyframes goTheLeft{
-	0%{
-		transform:translateX(-100%);
-		visibility: hidden;
-		opacity: 0;
-	}
-	100%{
-		transform:translateX(0%);
-		visibility: visible;
-		opacity: 1;
-	}
+    0%{
+        transform:translateX(-100%);
+        visibility: hidden;
+        opacity: 0;
+    }
+    100%{
+        transform:translateX(0%);
+        visibility: visible;
+        opacity: 1;
+    }
 }
 #preview{
     position:absolute;
@@ -167,6 +201,6 @@ li.chon {
     
     }
  #preview img{
- 	width: 150px;
+    width: 150px;
     height: 150px;
  }   
